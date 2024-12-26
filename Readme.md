@@ -5,7 +5,6 @@
   Compare statistical models and Transformer models on temporal data.
 </p>
 
-![dd](asset/temporal-tusion-animated.svg)
 
 ## Contents
 - [Temporal Tussle](#temporal-tussle)
