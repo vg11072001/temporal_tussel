@@ -97,15 +97,16 @@ The SellOut dataset contains detailed records of sales data. Below is a summary 
 
 #### Formulas
 
-- **mape** = 
+- **mape** =
+ 
 $$ \frac{\lvert \text{actual} - \text{forecast} \rvert}{\text{actual}} $$
 
-- **WMAPE** = 
+- **WMAPE** =
+ 
 $$ \frac{1}{n} \sum_{i=1}^{n} \left( \frac{\lvert \text{Actual}_i - \text{Forecasted}_i \rvert}{\text{Actual}_i} \right) \times 100 $$
 
-- **Accuracy mape** = 
-$$ Accuracy mape =  1 - \left( \frac{\sum_{i=1}^{n} \lvert \text{actual}_i - \text{forecast}_i \rvert}{\sum_{i=1}^{n} \text{actual}_i} \right) \times 100 $$
-
+- **Accuracy (MAPE)** =
+$$ 1 - \left( \frac{\sum_{i=1}^{n} \lvert \text{actual}_i - \text{forecast}_i \rvert}{\sum_{i=1}^{n} \text{actual}_i} \right) \times 100 $$
 
 #### Horizon 12
 
