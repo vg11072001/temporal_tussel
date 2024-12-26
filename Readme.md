@@ -5,7 +5,6 @@
   Compare statistical models and Transformer models on temporal data.
 </p>
 
-
 ## Contents
 - [Temporal Tussle](#temporal-tussle)
   - [Contents](#contents)
