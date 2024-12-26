@@ -2,25 +2,32 @@
 
 <p align="center">
   <img src="asset/TemporalTusion.gif" alt="Temporal Tussle"/> <br>
-  Compare statistical models and Transformer models for analyzing temporal data.
+  Compare statistical models and Transformer models on temporal data.
 </p>
-
-## Triple Exponential Smoothing vs TimeGPT
-
-In this analysis, I compare the performance of the statistical model Triple Exponential Smoothing (TES) with the pretrained TimeGPT model for time series forecasting. Using the SellOut dataset, I evaluate both models across multiple forecasting horizons (12, 24, 48) and discuss their effectiveness in capturing trends, seasonal patterns, and handling long-term and short-term data variations. The comparison provides insights into the strengths and weaknesses of each model, specifically in terms of Mean Absolute Percentage Error (MAPE), Weighted Mean Absolute Percentage Error (WMAPE), and Accuracy MAPE.
-
-
-> [!NOTE] Files
-> 1. [SellOut_experimentation_12_LT.ipynb](SellOut_experimentation_12_LT.ipynb)
-> 2. [ActualInput_experimentation](ActualInput_experimentation.xlsx)
-> 3. [TimeGPT](timegpt.pdf)
-> 4. [Triple Exponential Smoothing](TripleExponentialSmoothing.pdf)
 
 
 ## Contents
 - [Temporal Tussle](#temporal-tussle)
-  - [Triple Exponential Smoothing vs TimeGPT](#triple-exponential-smoothing-vs-timegpt)
   - [Contents](#contents)
+- [Benchmark the Time Series Models](#benchmark-the-time-series-models)
+    - [About Dataset](#about-dataset)
+      - [Summary on dataset](#summary-on-dataset)
+    - [Models and Results](#models-and-results)
+  - [Statistical Models](#statistical-models)
+    - [1. **ARIMA (AutoRegressive Integrated Moving Average):**](#1-arima-autoregressive-integrated-moving-average)
+    - [2. **SARIMA (Seasonal ARIMA):**](#2-sarima-seasonal-arima)
+    - [3. **ETS (Error, Trend, Seasonality):**](#3-ets-error-trend-seasonality)
+    - [4. **Theta Model:**](#4-theta-model)
+    - [5. **Croston’s Method:**](#5-crostons-method)
+  - [Neural Network Models](#neural-network-models)
+    - [1. **N-Beats:**](#1-n-beats)
+    - [2. **TimeGPT:**](#2-timegpt)
+    - [3. **TFT (Temporal Fusion Transformer):**](#3-tft-temporal-fusion-transformer)
+  - [Machine Learning Models](#machine-learning-models)
+    - [1. **XGBoost:**](#1-xgboost)
+    - [2. **LinearGAM (Generalized Additive Models):**](#2-lineargam-generalized-additive-models)
+    - [Key Takeaways](#key-takeaways)
+- [Triple Exponential Smoothing vs TimeGPT](#triple-exponential-smoothing-vs-timegpt)
   - [SellOut Dataset Overview](#sellout-dataset-overview)
     - [Dataset Characteristics](#dataset-characteristics)
     - [Time Range](#time-range)
@@ -37,6 +44,146 @@ In this analysis, I compare the performance of the statistical model Triple Expo
   - [Observations \& Results](#observations--results)
     - [To Do](#to-do)
   - [References](#references)
+
+# Benchmark the Time Series Models
+
+
+> [!NOTE] Files
+> 1. [Bechnmarks sheet](Benchmarks.xlsx)
+> 2. [EDA, arima, sarima, ets, theta](EDA,_arima,_sarima,_ets,_theta.ipynb)
+> 3. [N-beats Noetbook](nbeats.ipynb)
+> 4. [N-beats paper](N-BEATS.pdf)
+> 5. [N-hiTS paper](N-hiTS.pdf)
+> 6. Time Series Notes [Repo](https://github.com/vg11072001/Machine-Learning/tree/main/Time%20Series)
+
+
+### About Dataset
+- Daily Temperature of Major Cities
+
+A dataset on the daily temperature of major cities worldwide can help analyze global warming trends. Additionally, weather data is invaluable for various data science tasks, such as:
+- **Sales Forecasting**: Analyzing weather trends to predict product demand.
+- **Logistics**: Optimizing supply chain operations based on weather patterns.
+
+The dataset includes:
+- **Daily average temperature values** recorded in major cities globally.
+- **Format**: Separate `.txt` files for each city.
+
+The dataset is provided by the University of Dayton and is available for research and non-commercial purposes only.  For more details, please refer to [this page]([#](http://academic.udayton.edu/kissock/http/Weather/default.htm)).
+
+#### Summary on dataset
+- Electricity production with daily records.  
+- **Columns:** Date, 
+- IPG2211A2N  
+- **Total rows:** 12,054  
+- **Train data:** 10,592  
+- **Test data:** 1,462  
+
+### Models and Results
+
+| **Model**       | **Parameters Used**                                                                                   | **Package**          | **Forecasts at a Time** | **RMSE** | **MAE** | **MASE** | **MAPE** | **sMAPE** | **Runtime** | 
+|------------------|-------------------------------------------------------------------------------------------------------|----------------------|-------------------------|----------|----------|----------|----------|-----------|-------------|
+| **ARIMA**        | `order=(0, 1, 0)` using `auto_arima`                                                                  | Statsmodels          | Test data               | 14.24    | 11.84    | 42.38    | 12.27    | 11.26     | 0.4s        |
+| **SARIMA**       | Seasonal order = 12                                                                                   | Statsmodels          | Test data               | 14.24    | 11.84    | 42.38    | 12.27    | 11.26     | 0.6s        |
+| **ETS**          | `trend='add', seasonal='add', seasonal_periods=12`                                                    | Statsmodels          | Test data               | 16.58    | 14.13    | 50.57    | 14.59    | 13.23     | 2.2s        |
+| **Theta**        | Test data                                                                                             | Statsmodels          | Test data               | 15.48    | 12.97    | 46.41    | 13.44    | 12.25     | 4.7s        |
+| **Croston**      | Version = "optimized"                                                                                | Darts                | Test data               | 14.24    | 11.84    | 42.36    | 12.28    | 11.26     | 1.3s        |
+| **N-Beats**      | Best model fit, Early stopping, learning rate, max_prediction_length = 24                             | PyTorch Forecasting  | 24                      | 2.73     | 0.8      | 0.66     | 0.65     | 0.67      | 68.2s       |
+| **TimeGPT**      | `h=12, 24, 48`, `freq='D'`                                                                           | TimeGPT              | 12, 24, 48              | 10.41    | 8.5      | 4        | 8.27     | 8.82      | 14s         |
+| **TFT**          | Time issue                                                                                           | PyTorch Forecasting  | Test data               |          |          |          |          |           |             |
+| **XGBoost**      | `objective='reg:squarederror', n_estimators=1000`, converted TS to supervised learning                | XGBoost              | Test data               | 1.9      | 0.57     | 2.05     | 0.54     | 0.54      | 1200s       |
+
+
+The dataset consists of daily electricity production records, with **12,054 total rows** divided into **training (10,592 rows)** and **testing (1,462 rows)**. Various models were evaluated for their performance in forecasting future electricity production values. These models include both statistical approaches and machine learning methods. Below is a summary of the models and their results:
+
+## Statistical Models
+
+### 1. **ARIMA (AutoRegressive Integrated Moving Average):**
+- A widely used statistical model for time series forecasting, utilizing `auto_arima` for optimal parameter selection.
+- **Performance:**
+  - RMSE: 14.24
+  - MAPE: 12.27%
+
+### 2. **SARIMA (Seasonal ARIMA):**
+- An extension of ARIMA incorporating seasonality with a seasonal order of 12.
+- **Performance:**
+  - RMSE: 14.24
+  - MAPE: 12.27%
+
+### 3. **ETS (Error, Trend, Seasonality):**
+- A classical forecasting method with additive trend and seasonality components.
+- **Performance:**
+  - RMSE: 16.58
+  - MAPE: 14.59%
+
+### 4. **Theta Model:**
+- A simple yet effective statistical model for time series forecasting.
+- **Performance:**
+  - RMSE: 15.48
+  - MAPE: 13.44%
+
+### 5. **Croston’s Method:**
+- Optimized for intermittent demand data, showing performance comparable to ARIMA.
+- **Performance:**
+  - RMSE: 14.24
+  - MAPE: 12.28%
+
+
+## Neural Network Models
+
+### 1. **N-Beats:**
+- A deep learning model designed for long-term time series forecasting, trained using PyTorch Forecasting.
+- **Performance:**
+  - RMSE: 2.73
+  - MAPE: 0.65%
+
+### 2. **TimeGPT:**
+- A proprietary time-series-specific Transformer-based model, offering multi-horizon forecasting for 12, 24, and 48 steps.
+- **Performance:**
+  - RMSE: 10.41
+  - MAPE: 8.27%
+
+### 3. **TFT (Temporal Fusion Transformer):**
+- A powerful model for handling complex temporal relationships.
+- **Challenges:** Encountered runtime and time-issue challenges, making its evaluation incomplete.
+
+## Machine Learning Models
+
+### 1. **XGBoost:**
+- A tree-based gradient boosting model applied to a supervised learning transformation of the time series data.
+- **Performance:**
+  - RMSE: 1.9
+  - MAPE: 0.54%
+
+### 2. **LinearGAM (Generalized Additive Models):**
+- A linear regression-based model for handling non-linear relationships.
+- **Performance:** Results not reported but could provide interpretable results.
+
+### Key Takeaways
+
+- Machine learning models like XGBoost and deep learning models such as N-Beats exhibited superior performance compared to traditional statistical models.
+- TimeGPT and Transformer-based approaches are promising for temporal data, especially for multi-horizon forecasting tasks.
+- While statistical models like ARIMA and SARIMA are reliable and interpretable, they struggled to match the accuracy of advanced neural network and machine learning methods.
+- Runtime and computational efficiency varied significantly, with statistical models being faster but neural networks and ensemble models offering better accuracy.
+
+---
+
+Reference:
+
+- [time-series-analysis-and-forecasting](tutorial-time-series-analysis-and-forecasting.ipynb)
+
+
+# Triple Exponential Smoothing vs TimeGPT
+
+In this analysis, I compare the performance of the statistical model Triple Exponential Smoothing (TES) with the pretrained TimeGPT model for time series forecasting. Using the SellOut dataset, I evaluate both models across multiple forecasting horizons (12, 24, 48) and discuss their effectiveness in capturing trends, seasonal patterns, and handling long-term and short-term data variations. The comparison provides insights into the strengths and weaknesses of each model, specifically in terms of Mean Absolute Percentage Error (MAPE), Weighted Mean Absolute Percentage Error (WMAPE), and Accuracy MAPE.
+
+
+> [!NOTE] Files
+> 1. [SellOut_experimentation_12_LT.ipynb](SellOut_experimentation_12_LT.ipynb)
+> 2. [ActualInput_experimentation](ActualInput_experimentation.xlsx)
+> 3. [TimeGPT paper](timegpt.pdf)
+> 3. [TimeGPT notebook](project_timegpt.ipynb)
+> 4. [Triple Exponential Smoothing paper](TripleExponentialSmoothing.pdf)
+
 
 ## SellOut Dataset Overview
 
