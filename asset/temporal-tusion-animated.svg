@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8f9fa"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="400" height="300" fill="url(#bg-gradient)"/>
+  
+  <!-- Title at top -->
+  <text x="200" y="50" text-anchor="middle" font-family="Arial" font-weight="bold" fill="#1a365d" font-size="28">
+    Temporal Tusion
+    <animate attributeName="fill-opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- Title at top -->
+  <text x="200" y="270" text-anchor="middle" font-family="Arial" fill="#1a365d" font-size="12">
+    Compare statistical models and Transformer models on temporal data.
+    <animate attributeName="fill-opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- Statistical Model (Left Side) -->
+  <g transform="translate(50, 100)">
+    <text x="75" y="-20" text-anchor="middle" font-family="Arial" fill="#2c5282" font-size="14">Statistical Models</text>
+    <path d="M0 100 Q40 20 80 60 T150 30" fill="none" stroke="#2c5282" stroke-width="3" stroke-dasharray="200">
+      <animate attributeName="stroke-dashoffset" from="200" to="0" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <!-- Time indicators -->
+    <g transform="translate(0, 120)" fill="#4a5568" font-family="Arial" font-size="12">
+      <text x="0" y="0">t-1</text>
+      <text x="50" y="0">t-2</text>
+      <text x="100" y="0">t-2</text>
+      <text x="150" y="0">t-n</text>
+    </g>
+  </g>
+
+  <!-- Transformer Model (Right Side) -->
+  <g transform="translate(250, 100)">
+    <text x="50" y="-20" text-anchor="middle" font-family="Arial" fill="#2c5282" font-size="14">Transformer Models</text>
+    <!-- Attention Heads -->
+    <g filter="url(#glow)">
+      <circle cx="0" cy="30" r="15" fill="#4299e1">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="50" cy="30" r="15" fill="#4299e1">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="100" cy="30" r="15" fill="#4299e1">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" begin="1s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    
+    <!-- Connection Lines -->
+    <g>
+      <line x1="0" y1="45" x2="0" y2="85" stroke="#2c5282" stroke-width="2">
+        <animate attributeName="stroke-dasharray" values="2,2;4,0" dur="1s" repeatCount="indefinite"/>
+      </line>
+      <line x1="50" y1="45" x2="50" y2="85" stroke="#2c5282" stroke-width="2">
+        <animate attributeName="stroke-dasharray" values="2,2;4,0" dur="1s" begin="0.3s" repeatCount="indefinite"/>
+      </line>
+      <line x1="100" y1="45" x2="100" y2="85" stroke="#2c5282" stroke-width="2">
+        <animate attributeName="stroke-dasharray" values="2,2;4,0" dur="1s" begin="0.6s" repeatCount="indefinite"/>
+      </line>
+    </g>
+    
+    <!-- Output Layer -->
+    <rect x="-10" y="85" width="120" height="30" rx="5" fill="#2c5282">
+      <animate attributeName="fill-opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- Connecting Arrow -->
+  <!-- <path d="M200 150 L225 150" stroke="#4a5568" stroke-width="2" marker-end="url(#arrow)">
+    <animate attributeName="stroke-dasharray" values="2,2;4,0" dur="1s" repeatCount="indefinite"/>
+  </path> -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4a5568"/>
+    </marker>
+  </defs>
+</svg>

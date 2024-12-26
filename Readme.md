@@ -1,10 +1,11 @@
 # Temporal Tussle
 
 <p align="center">
-  <img src="asset/TemporalTusion.gif" alt="Temporal Tussle"/> <br>
+  <img src="asset/temporal-tusion-animated.svg" alt="Temporal Tussle"/> <br>
   Compare statistical models and Transformer models on temporal data.
 </p>
 
+![dd](asset/temporal-tusion-animated.svg)
 
 ## Contents
 - [Temporal Tussle](#temporal-tussle)
