@@ -1,7 +1,8 @@
 # Temporal Tussle
 
 <p align="center">
-  <img src="asset/TemporalTusion.gif" alt="Temporal Tussle"/>
+  <img src="asset/TemporalTusion.gif" alt="Temporal Tussle"/> <br>
+  Compare statistical models and Transformer models for analyzing temporal data.
 </p>
 
 ## Triple Exponential Smoothing vs TimeGPT
