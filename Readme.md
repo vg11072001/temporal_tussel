@@ -2,7 +2,6 @@
 
 <p align="center">
   <img src="asset/temporal-tusion-animated.svg" alt="Temporal Tussle"/> <br>
-  Compare statistical models and Transformer models on temporal data.
 </p>
 
 ## Contents
