@@ -25,7 +25,7 @@
 
   <!-- Subtitle at bottom -->
   <text x="200" y="40" text-anchor="middle" font-family="Arial" fill="#1a365d" font-size="10">
-    Compare statistical models and Transformer models on temporal data.
+    Comparison of statistical models and Transformer models on temporal data.
     <animate attributeName="fill-opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
   </text>
 
