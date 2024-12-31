@@ -1,8 +1,6 @@
 # Temporal Tussle
 
-<p align="center">
-  <img src="asset/temporal-tusion-animated.svg" alt="Temporal Tussle"/> <br>
-</p>
+![temporal-tusion](asset/temporal-tusion-animated.svg)
 
 ## Contents
 - [Temporal Tussle](#temporal-tussle)
