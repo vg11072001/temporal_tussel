@@ -18,13 +18,13 @@
   <rect width="400" height="200" fill="url(#bg-gradient)"/>
   
   <!-- Title at top -->
-  <text x="200" y="30" text-anchor="middle" font-family="Arial" font-weight="bold" fill="#1a365d" font-size="20">
+  <text x="200" y="20" text-anchor="middle" font-family="Arial" font-weight="bold" fill="#1a365d" font-size="20">
     Temporal Tusion
     <animate attributeName="fill-opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
   </text>
 
   <!-- Subtitle at bottom -->
-  <text x="200" y="180" text-anchor="middle" font-family="Arial" fill="#1a365d" font-size="10">
+  <text x="200" y="40" text-anchor="middle" font-family="Arial" fill="#1a365d" font-size="10">
     Compare statistical models and Transformer models on temporal data.
     <animate attributeName="fill-opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
   </text>
